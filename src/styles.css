@@ -1,0 +1,172 @@
+body,
+html {
+    margin: 0px;
+    background-color: #f8f9fa;
+    color: #0d1b2a;
+    font-family: 'montserrat', system-ui,-apple-system, BlinkMacSystemFont,Arial, sans-serif; 
+    height: 100%;
+}
+
+.container {
+    padding: 50px;
+}
+
+dialog {
+    border: none;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+    min-width: 500px;
+    min-height: 400px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+input,
+select,
+textarea {
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 0px;
+    margin-bottom: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: montserrat;
+    color: #2C3E50;
+    font-size: 13px;
+}
+
+.form-inputs {
+    display: flex;
+    flex-direction: column;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+#cancel-btn,
+#confirm-btn {
+    border: none;
+    background-color: #415a77;
+    width: 80px;
+    height: 40px;
+    border-radius: 5px;
+    color: #e9ecef;
+}
+
+#confirm-btn {
+    margin-left: auto;
+}
+
+
+.add-todo {
+    border: none;
+    background-color: #415a77;
+    width: 70px;
+    height: 70px;
+    border-radius: 35px;
+    cursor: pointer;
+    position: absolute;
+    bottom: 50px;
+    right: 50px;
+    font-size: 2em;
+    color: #e0e1dd;
+}
+
+ul {
+    padding-inline-start: 0px;
+}
+
+li {
+    list-style-type: none;
+    padding: 15px 10px;
+    border: 2px solid #e9ecef;
+    border-radius: 5px;
+    margin: 20px 0px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.high,
+.medium,
+.low,
+.overdue {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: #f8f9fa;
+}
+
+.overdue {
+    border: #f72585 solid 3px;
+}
+
+.overdue:checked {
+    background-color: #f72585; 
+}
+
+
+.high {
+    border: #ff7d00 solid 3px;
+}
+
+.high:checked {
+    background-color: #ff7d00; 
+}
+
+.medium {
+    border: #3a0ca3 solid 3px;
+}
+
+.medium:checked {
+    background-color: #3a0ca3;
+}
+
+.low {
+    border: #4cc9f0 solid 3px;
+}
+
+.low:checked {
+    background-color: #4cc9f0;
+}
+
+.words-div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.description {
+    color: #6c757d;
+    font-size: 0.8em;
+}
+
+.priority {
+    margin-left: auto;
+    background-color: #dee2e6;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 0.9em;
+}
+
+.date   {
+    margin-right: 10px;
+    background-color: #dee2e6;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 0.9em;
+}

@@ -1,1 +1,4 @@
-console.log("hi")
+import "./styles.css";
+import {AddButton} from "./list.js"
+
+AddButton()
