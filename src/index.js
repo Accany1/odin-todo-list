@@ -1,4 +1,6 @@
 import "./styles.css";
-import {AddButton} from "./list.js"
+import {AddButton, ConfirmButton, CancelButton} from "./list.js"
 
 AddButton()
+ConfirmButton()
+CancelButton()

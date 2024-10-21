@@ -9,6 +9,27 @@ html {
 
 .container {
     padding: 50px;
+    display: grid;
+    grid-template-columns: 0.1fr 1fr;
+    grid-template-areas: 
+        "sidebar main"
+        "sidebar main"
+        "sidebar main";
+}
+
+.sidebar {
+    grid-area: sidebar;
+    margin-top: 110px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 1.3em;
+
+}
+
+.sidebar-item {
+    cursor: pointer;
+    margin-right: auto;
 }
 
 dialog {
@@ -58,6 +79,7 @@ textarea {
     height: 40px;
     border-radius: 5px;
     color: #e9ecef;
+    cursor: pointer;
 }
 
 #confirm-btn {
@@ -155,8 +177,15 @@ li {
     font-size: 0.8em;
 }
 
-.priority {
+.projects {
     margin-left: auto;
+    background-color: #dee2e6;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 0.9em;
+}
+
+.priority {
     background-color: #dee2e6;
     padding: 10px;
     border-radius: 5px;
