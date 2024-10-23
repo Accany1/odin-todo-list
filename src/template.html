@@ -21,6 +21,13 @@
                 <input type="date" id="due-date" required>
             </div>
             <div class="form-inputs">
+                <label for="projects">Projects: </label>
+                <select id="projects" required>
+                    <option value="home">Home</option>
+                    <option value="work">Work</option>
+                </select>
+            </div>
+            <div class="form-inputs">
                 <label for="priority">Priority: </label>
                 <select id="priority">
                     <option value="low">Low</option>
@@ -36,9 +43,9 @@
     </dialog>
     <div class="container">
         <div class="sidebar">
-            <div class="sidebar-item">All</div>
-            <div class="sidebar-item">Home</div>
-            <div class="sidebar-item">Work</div>
+            <div class="sidebar-item" id="all-filter">All</div>
+            <div class="sidebar-item" id="home-filter">Home</div>
+            <div class="sidebar-item" id="work-filter">Work</div>
         </div>
         <h1>Todo List</h1>
         <div class="list-container">

@@ -1,7 +1,6 @@
 import { compareAsc, format, formatDistanceToNowStrict  } from "date-fns";
 
-let todoList = []
-
+const projectsInput = document.getElementById("projects")
 const priorityInput = document.getElementById("priority")
 const titleInput = document.getElementById("title")
 const descriptionInput = document.getElementById("description")
@@ -20,33 +19,54 @@ class todo {
     }
 }
 
-class addTodoToList{
+class ReturnTodo{
     constructor() {
     }
 
     newTodo = (title, description, dueDate, priority, projects) => {
         const newTodo = new todo(title, description, dueDate, priority, projects)
-        todoList.push(newTodo)
+        return newTodo
     }
 }
 
-const displayTodoList = () => {
+const AddTodoToStorage = (title, description, dueDate, priority, projects) => {
+    const returnClass = new ReturnTodo()
+    const newObj = returnClass.newTodo(title, description, dueDate, priority, projects)
+    let oldObj = JSON.parse(localStorage.getItem("todo"))
+    oldObj.push(newObj)
+    localStorage.setItem("todo",JSON.stringify(oldObj))
+}
+
+const DisplayTodoList = (type) => {
+    let todoList = JSON.parse(localStorage.getItem("todo"))
     todoList.sort((a, b) => compareAsc(a.dueDate, b.dueDate))
     todoList = todoList.map((item,index) => ({ ...item, id:index+1}))
 
+    let newList = []
+
+    if (type === "work"){
+        newList = todoList.filter((item) => item.projects === "work")
+    } else if (type === "home") {
+        newList = todoList.filter((item) => item.projects === "home")
+    } else {
+        newList = todoList
+        
+    }
+    
+
     const container = document.querySelector(".todo-ul")
     container.innerHTML = ""
-    for (let item in todoList) {
+    for (let item in newList) {
         //main card li
         const card = document.createElement("li")
         card.classList.add("todo-card")
         //tickbox
         const tickBox = document.createElement("input")
         tickBox.type = "checkbox"
-        if (compareAsc(new Date(), todoList[item].dueDate) === 1) {
+        if (compareAsc(new Date(), newList[item].dueDate) === 1) {
             tickBox.classList.add("overdue")
         } else {
-            tickBox.classList.add(todoList[item].priority)
+            tickBox.classList.add(newList[item].priority)
         }
 
         const wordsDiv = document.createElement("div")
@@ -55,28 +75,28 @@ const displayTodoList = () => {
         //title
         const title = document.createElement("div")
         title.classList.add("title")
-        title.textContent = todoList[item].title
+        title.textContent = newList[item].title
 
         //description
         const description = document.createElement("div")
-        description.textContent = todoList[item].description
+        description.textContent = newList[item].description
         description.classList.add("description")
 
         const projects = document.createElement("div")
         projects.classList.add("projects")
-        projects.textContent = todoList[item].projects
+        projects.textContent = newList[item].projects
 
         const date = document.createElement("div")
-        if (compareAsc(new Date(), todoList[item].dueDate) === 1) {
+        if (compareAsc(new Date(), newList[item].dueDate) === 1) {
             date.textContent = "Overdue"
             date.style.backgroundColor = "#f72585"
         } else {
-            date.textContent = formatDistanceToNowStrict(todoList[item].dueDate)
+            date.textContent = formatDistanceToNowStrict(newList[item].dueDate)
         }
         date.classList.add("date")
 
         const priority = document.createElement("div")
-        priority.textContent = todoList[item].priority
+        priority.textContent = newList[item].priority
         priority.classList.add("priority")
         
 
@@ -93,27 +113,25 @@ const displayTodoList = () => {
         tickBox.addEventListener("click", () => {
             if (tickBox.checked) {
                 card.remove()
-                todoList = todoList.filter((n) => n.id !== todoList[item].id)
+                todoList = todoList.filter((n) => n !== todoList[item])
                 console.log(todoList)
+                localStorage.setItem("todo",JSON.stringify(todoList))
             }
         })
     }
 }
 
-
 // template todos
-const addTodoClass = new addTodoToList()
+// const returnClass = new ReturnTodo()
+// const starter = [returnClass.newTodo("Clean the kitchen", "Clean the damned thing throughly", new Date(2024, 9, 20), "high", "home"),
+//     returnClass.newTodo("Do the dishes", "Yes it's my turn", new Date(2024, 9, 22), "medium", "work"),
+//     returnClass.newTodo("Make the bed", "It's that time of the week again", new Date(2024, 10, 20), "low", "work"),
+//     returnClass.newTodo("Mop the floor", "all over againnn", new Date(2024, 9, 21), "low", "home")]
 
-addTodoClass.newTodo("Clean the kitchen", "Clean the damned thing throughly", new Date(2024, 9, 20), "high", "home")
-addTodoClass.newTodo("Do the dishes", "Yes it's my turn", new Date(2024, 9, 22), "medium", "work")
-addTodoClass.newTodo("Make the bed", "It's that time of the week again", new Date(2024, 10, 20), "low", "work")
-addTodoClass.newTodo("Mop the floor", "all over againnn", new Date(2024, 9, 21), "low", "home")
+// console.log(starter)
+// localStorage.setItem("todo",JSON.stringify(starter))
 
-
-console.log(todoList)
-
-
-displayTodoList()
+DisplayTodoList('all')
 const todoDialog = document.querySelector("#todo-dialog")
 
 //button show modal
@@ -128,9 +146,8 @@ const AddButton = () => {
 const ConfirmButton = () => {
     cfmBtn.addEventListener("click", () => {
         if (todoForm.checkValidity()) {
-            addTodoClass.newTodo(titleInput.value, descriptionInput.value, dueDateInput.value, priorityInput.value)
-            displayTodoList()
-
+            AddTodoToStorage(titleInput.value, descriptionInput.value, dueDateInput.value, priorityInput.value, projectsInput.value)
+            DisplayTodoList()
             event.preventDefault()
             todoDialog.close()
         }
@@ -144,6 +161,34 @@ const CancelButton = () => {
     })
 }
 
+const homeBtn = document.getElementById("home-filter")
+
+const HomeButton = () => {
+    homeBtn.addEventListener("click", () => {
+        DisplayTodoList("home")
+    })
+}
+
+const allBtn = document.getElementById("all-filter")
+
+const AllButton = () => {
+    allBtn.addEventListener("click", () => {
+        DisplayTodoList("all")
+    })
+}
+
+const workBtn = document.getElementById("work-filter")
+
+const WorkButton = () => {
+    workBtn.addEventListener("click", () => {
+        DisplayTodoList("work")
+    })
+}
+
 export {AddButton,
      ConfirmButton,
-     CancelButton}
+     CancelButton,
+     HomeButton,
+     AllButton,
+     WorkButton
+    }
