@@ -24,12 +24,18 @@ const AddTodoToStorage = (title, description, dueDate, priority, projects) => {
     const returnClass = new ReturnTodo()
     const newObj = returnClass.newTodo(title, description, dueDate, priority, projects)
     let oldObj = JSON.parse(localStorage.getItem("todo"))
+    if (oldObj === null) {
+        oldObj = []
+    }
     oldObj.push(newObj)
     localStorage.setItem("todo",JSON.stringify(oldObj))
 }
 
 const DisplayTodoList = (type) => {
     let todoList = JSON.parse(localStorage.getItem("todo"))
+    if (todoList === null) {
+        return
+    }
     todoList.sort((a, b) => compareAsc(a.dueDate, b.dueDate))
     todoList = todoList.map((item,index) => ({ ...item, id:index+1}))
 
