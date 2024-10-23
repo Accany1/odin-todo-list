@@ -1,5 +1,7 @@
 import "./styles.css";
-import {AddButton, ConfirmButton, CancelButton, HomeButton, AllButton, WorkButton} from "./list.js"
+import {HomeButton, AllButton, WorkButton} from "./projects.js"
+import {AddButton, ConfirmButton, CancelButton} from "./form.js"
+
 
 AddButton()
 ConfirmButton()
