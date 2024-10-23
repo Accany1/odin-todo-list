@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<script defer src="main.js"></script></head>
+<body>
+    <dialog id="todo-dialog">
+        <form id="todo-form">
+            <div class="form-inputs">
+                <label for="title">Title: </label>
+                <input type="text" id="title" required>
+            </div>
+            <div class="form-inputs">
+                <label for="description">Description: </label>
+                <textarea id="description" required></textarea>
+            </div>
+            <div class="form-inputs">
+                <label for="due-date">Due Date: </label>
+                <input type="date" id="due-date" required>
+            </div>
+            <div class="form-inputs">
+                <label for="projects">Projects: </label>
+                <select id="projects" required>
+                    <option value="home">Home</option>
+                    <option value="work">Work</option>
+                </select>
+            </div>
+            <div class="form-inputs">
+                <label for="priority">Priority: </label>
+                <select id="priority">
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
+            </div>
+            <div class="button-container">
+                <button id="cancel-btn" value="cancel" formmethod="dialog">Cancel</button>
+                <button id="confirm-btn" value="submit" formmethod="dialog">Confirm</button>
+            </div>
+        </form>
+    </dialog>
+    <div class="container">
+        <div class="sidebar">
+            <div class="sidebar-item" id="all-filter">All</div>
+            <div class="sidebar-item" id="home-filter">Home</div>
+            <div class="sidebar-item" id="work-filter">Work</div>
+        </div>
+        <h1>Todo List</h1>
+        <div class="list-container">
+            <ul class="todo-ul"></ul>
+        </div>
+        <button class="add-todo">+</button>
+    </div>
+</body>
+</html>
